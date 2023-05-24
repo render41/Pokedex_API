@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PokedexController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PokedexController : MonoBehaviour
     [SerializeField] Texture2D sprite;
     [SerializeField] PokedexInfos pokedexInfos;
     [SerializeField] TMP_InputField inputField;
+    [SerializeField] Dropdown languageDropdown;
 
     private void Start() => StartCoroutine(GetDatas());
 
@@ -88,10 +90,30 @@ public class PokedexController : MonoBehaviour
     {
         pokedexInfos.NameDefine(string.Format("0{0} - {1}", pokemonID.id, pokemonID.name.ToUpper()));
         pokedexInfos.DescriptionDefine(GetDescriptionEnglish());
+        /*if (languageDropdown.name == "en")
+        {
+            pokedexInfos.DescriptionDefine(GetDescriptionEnglish());
+        }
+        else if (languageDropdown.name == "es")
+        {
+            pokedexInfos.DescriptionDefine(GetDescriptionSpanish());
+        }*/
         pokedexInfos.SpriteDefine(sprite);
     }
 
     private string GetDescriptionEnglish()
+    {
+        for (int i = 0; i <= pokedexDescriptionRoot.flavor_text_entries.Length; i++)
+        {
+            if (pokedexDescriptionRoot.flavor_text_entries[i].language.name == "en")
+            {
+                return pokedexDescriptionRoot.flavor_text_entries[i].flavor_text.Replace("\n", " ");
+            }
+        }
+        return null;
+    }
+
+    private string GetDescriptionSpanish()
     {
         for (int i = 0; i <= pokedexDescriptionRoot.flavor_text_entries.Length; i++)
         {
