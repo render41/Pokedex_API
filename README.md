@@ -1,2 +1,2 @@
 # Pokedex_API
- Project of studys in progress using PokeAPI (https://pokeapi.co/)
+ Project make in Unity for studys. Work in progress using PokeAPI (https://pokeapi.co/)
